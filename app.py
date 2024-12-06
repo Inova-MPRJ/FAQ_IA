@@ -19,7 +19,7 @@ embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-b
 # Conecte ao Vector Store
 vector_store = QdrantVectorStore(
     client=client,
-    collection_name="faq_collection1",  # Nome da coleção salva
+    collection_name="faq_collection2",  # Nome da coleção salva
     embedding=embeddings,
 )
 

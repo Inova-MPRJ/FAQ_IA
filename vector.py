@@ -23,7 +23,7 @@ client = QdrantClient(
     timeout=60.0,
 )
 
-collection_name = "faq_collection1"
+collection_name = "faq_collection2"
 
 
 if not client.collection_exists(collection_name):
@@ -68,13 +68,13 @@ def indexer(files, folder, method='document', chunk_size=2000, chunk_overlap=200
 
 vector_store = QdrantVectorStore(
     client=client,
-    collection_name="faq_collection1",
+    collection_name="faq_collection2",
     embedding=embeddings,
 )
 
 
 if __name__ == "__main__":
-    folder = r"\assets"
+    folder = r"C:\workspace\MPRJ\FAQ_IA\assets"
     docs = indexer(os.listdir(folder), folder, method='chunk')
 
     vector_store.add_documents(docs)
