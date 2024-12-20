@@ -7,10 +7,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-api_key = os.environ['GROQ_API_KEY']
 
-from langchain_groq import ChatGroq
-llm=ChatGroq(model="llama-3.1-70b-versatile")
+
+from langchain_community.chat_models import ChatOllama
+llm = ChatOllama(model="llama3.2")
 
 
 def answer_question(question, retriever):

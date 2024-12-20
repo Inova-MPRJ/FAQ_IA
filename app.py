@@ -1,26 +1,20 @@
-import os
-from langchain_qdrant import QdrantVectorStore
-from qdrant_client import QdrantClient
 from langchain_huggingface import HuggingFaceEmbeddings
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
-qdrant_api_key = os.getenv("QDRANT_API_KEY")
-qdrant_url = os.getenv("QDRANT_URL")
-
-client = QdrantClient(
-    url=qdrant_url,
-    api_key=qdrant_api_key,
-)
-
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
-# Conecte ao Vector Store
-vector_store = QdrantVectorStore(
-    client=client,
-    collection_name="faq_collection2",  # Nome da coleção salva
-    embedding=embeddings,
+
+URI = "tcp://localhost:19530"  
+collection_name = "faq_collection2"
+
+from langchain_milvus import Milvus
+
+vector_store = Milvus(
+    embeddings,
+    connection_args={"uri": URI},
+    collection_name=collection_name,
 )
 
 retriever = vector_store.as_retriever(search_type="mmr", search_kwargs={"k": 1})
