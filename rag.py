@@ -10,7 +10,7 @@ load_dotenv()
 api_key = os.environ['GROQ_API_KEY']
 
 from langchain_groq import ChatGroq
-llm=ChatGroq(model="llama-3.1-70b-versatile")
+llm=ChatGroq(model="llama-3.3-70b-versatile")
 
 
 def answer_question(question, retriever):
